@@ -1,0 +1,59 @@
+# semantic.toml - what this nest's data *means* (RFC-0016). Read by the MCP `schema`
+# tool, the admin UI, and the scaffolded skill. Edit descriptions freely; the
+# `[table.*.footguns]` are DERIVED from the ABI and regenerated - leave them be.
+
+schema_version = 1
+
+[nest]
+description = "The `ens` nest on mainnet. (seeded from the ABI - edit semantic.toml to improve this)"
+
+[table.c0__approval_for_all]
+description = "`ApprovalForAll(address,address,bool)` events emitted by the `c0` contract. (seeded from the ABI - edit semantic.toml to improve this)"
+grain = "one row per ApprovalForAll(address,address,bool) event"
+
+[table.c0__approval_for_all.columns]
+approved = "The `approved` bool parameter - stored as exact text `'true'`/`'false'`, not a SQL boolean. `approved = true` and `AND`/`NOT` implicitly cast and work; `COALESCE`, `CASE`, `bool_and`/`bool_or` and `UNION` do not. Write `approved = 'true'` or `CAST(approved AS BOOLEAN)`. (seeded from the ABI - edit semantic.toml to improve this)"
+operator = "The `operator` address parameter. (seeded from the ABI - edit semantic.toml to improve this)"
+owner = "The `owner` address parameter. (seeded from the ABI - edit semantic.toml to improve this)"
+
+[table.c0__approval_for_all.footguns]
+bools = ["approved"]
+
+[table.c0__new_owner]
+description = "`NewOwner(bytes32,bytes32,address)` events emitted by the `c0` contract. (seeded from the ABI - edit semantic.toml to improve this)"
+grain = "one row per NewOwner(bytes32,bytes32,address) event"
+
+[table.c0__new_owner.columns]
+label = "The `label` bytes32 parameter. (seeded from the ABI - edit semantic.toml to improve this)"
+node = "The `node` bytes32 parameter. (seeded from the ABI - edit semantic.toml to improve this)"
+owner = "The `owner` address parameter. (seeded from the ABI - edit semantic.toml to improve this)"
+
+[table.c0__new_resolver]
+description = "`NewResolver(bytes32,address)` events emitted by the `c0` contract. (seeded from the ABI - edit semantic.toml to improve this)"
+grain = "one row per NewResolver(bytes32,address) event"
+
+[table.c0__new_resolver.columns]
+node = "The `node` bytes32 parameter. (seeded from the ABI - edit semantic.toml to improve this)"
+resolver = "The `resolver` address parameter. (seeded from the ABI - edit semantic.toml to improve this)"
+
+[table.c0__new_t_t_l]
+description = "`NewTTL(bytes32,uint64)` events emitted by the `c0` contract. (seeded from the ABI - edit semantic.toml to improve this)"
+grain = "one row per NewTTL(bytes32,uint64) event"
+
+[table.c0__new_t_t_l.columns]
+node = "The `node` bytes32 parameter. (seeded from the ABI - edit semantic.toml to improve this)"
+ttl = "The `ttl` uint64 parameter. (seeded from the ABI - edit semantic.toml to improve this)"
+
+[table.c0__transfer]
+description = "`Transfer(bytes32,address)` events emitted by the `c0` contract. (seeded from the ABI - edit semantic.toml to improve this)"
+grain = "one row per Transfer(bytes32,address) event"
+
+[table.c0__transfer.columns]
+node = "The `node` bytes32 parameter. (seeded from the ABI - edit semantic.toml to improve this)"
+owner = "The `owner` address parameter. (seeded from the ABI - edit semantic.toml to improve this)"
+
+[view]
+
+# Authored views (views/*.sql) are described here so the MCP/`/schema` can render them:
+# [view.your_view_name]
+# description = "What this derivation computes."

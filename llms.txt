@@ -1,0 +1,26 @@
+# nuthatch nest on mainnet
+
+A self-hosted blockchain index. Query it locally; there is no third-party API.
+
+## Contracts
+- `c0` = 0x00000000000c2e074ec69a0dfb2997ba6c7d2e1e
+
+## Tables (one per contract event)
+- `c0__approval_for_all` - ApprovalForAll(address,address,bool) (block_number, block_hash, block_timestamp, tx_hash, log_index, address, _seq, owner, operator, approved)
+- `c0__new_owner` - NewOwner(bytes32,bytes32,address) (block_number, block_hash, block_timestamp, tx_hash, log_index, address, _seq, node, label, owner)
+- `c0__new_resolver` - NewResolver(bytes32,address) (block_number, block_hash, block_timestamp, tx_hash, log_index, address, _seq, node, resolver)
+- `c0__new_t_t_l` - NewTTL(bytes32,uint64) (block_number, block_hash, block_timestamp, tx_hash, log_index, address, _seq, node, ttl)
+- `c0__transfer` - Transfer(bytes32,address) (block_number, block_hash, block_timestamp, tx_hash, log_index, address, _seq, node, owner)
+
+## Live HTTP API (run `nuthatch dev`)
+- `GET /`                    index status
+- `GET /tables`              every table with its columns
+- `GET /table/{name}?limit=N` recent rows of one table (hot + sealed)
+- `GET /entity/{id}`         one row by id (`{block:012}-{logindex:06}`)
+- `GET /sql?q=SELECT...`     read-only SQL; each table is a view named `{alias}__{event}`
+- `GET /balances?limit=N`    top holder balances (when an ERC-20 Transfer table is present)
+- `GET /balance/{address}`   one address's derived balance
+
+## MCP (for coding agents)
+Run `nuthatch mcp` (stdio) to expose tools: status, schema, tables, table, sql, entity,
+balance, top_balances. Fully offline against the local instance; nothing phones home.
