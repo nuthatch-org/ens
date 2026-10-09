@@ -1,6 +1,6 @@
 # ens
 
-A [nuthatch](https://github.com/nightswatchhq/nuthatch) nest: **ENS Registry on Ethereum**.
+A [nuthatch](https://github.com/nuthatch-org/nuthatch) nest: **ENS Registry on Ethereum**.
 
 The ownership graph: owners, resolvers and TTLs.
 
@@ -25,7 +25,7 @@ Indexed blocks **25,791,620 to 25,811,556** and sealed **4,635 events**. Every t
 ## Run it
 
 ```sh
-nuthatch init --from https://github.com/nightswatchhq/ens
+nuthatch init --from https://github.com/nuthatch-org/ens
 cd ens
 nuthatch dev --dir . --backfill 50000 --seal-direct
 nuthatch sql --dir . "SELECT count(*) FROM \"c0__approval_for_all\""
